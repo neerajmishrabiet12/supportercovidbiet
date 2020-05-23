@@ -1,0 +1,27 @@
+//Potential authentication to avoid the COVID-19 patient
+module example( in2,in1,out2);
+ input in2,in1;
+ output out2;
+ pmos #(10) pmos(w3,w1,in2); // 2.0u 0.12u
+ nmos #(10) nmos(w3,vss,w4); // 1.0u 0.12u
+ nmos #(59) nmos(in2,vss,in1); // 1.0u 0.12u
+ pmos #(59) pmos(in2,vdd,in1); // 2.0u 0.12u
+ nmos #(24) nmos(w4,vss,in2); // 1.0u 0.12u
+ pmos #(24) pmos(w4,vdd,in2); // 2.0u 0.12u
+ pmos #(10) pmos(w7,w6,in1); // 2.0u 0.12u
+ nmos #(10) nmos(w7,vss,in2); // 1.0u 0.12u
+ pmos #(10) pmos(w8,vdd,in2); // 2.0u 0.12u
+ nmos #(10) nmos(w9,w1,in1); // 1.0u 0.12u
+ pmos #(10) pmos(w9,vdd,w4); // 2.0u 0.12u
+ nmos #(10) nmos(w8,w6,in2); // 1.0u 0.12u
+ not #(10) inv(out2,w6);
+endmodule
+
+// Simulation parameters in Verilog Format
+always
+#1000 in2=~in2;
+#2000 in1=~in1;
+
+// Simulation parameters
+// in2 CLK 10 10
+// in1 CLK 20 20
